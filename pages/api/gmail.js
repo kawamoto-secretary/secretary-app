@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth/next";
 import { google } from "googleapis";
-import NextAuth from "./auth/[...nextauth]";
+import { authOptions } from "./auth/[...nextauth]";
 
 export default async function handler(req, res) {
-  const session = await getServerSession(req, res, NextAuth);
+  const session = await getServerSession(req, res, authOptions);
   if (!session) return res.status(401).json({ error: "未ログイン" });
 
   const auth = new google.auth.OAuth2();
